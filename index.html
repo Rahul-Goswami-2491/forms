@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selector Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .form-container { width: 100%; max-width: 800px; margin: auto; }
+        .hidden { display: none; }
+        iframe { width: 100%; border: none; }
+        .language-selector { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Form with Language Selector</h1>
+        
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <label>
+                <input type="radio" name="language" value="english" checked> English
+            </label>
+            <label>
+                <input type="radio" name="language" value="hindi"> Hindi
+            </label>
+        </div>
+        
+        <!-- Google Form Embed -->
+        <iframe id="google-form" src="https://forms.gle/cSY5vvK11iEZunWW8" height="800px"></iframe>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('google-form');
+
+            document.querySelectorAll('input[name="language"]').forEach((input) => {
+                input.addEventListener('change', function() {
+                    const selectedLanguage = document.querySelector('input[name="language"]:checked').value;
+                    let newSrc = '';
+
+                    if (selectedLanguage === 'english') {
+                        newSrc = 'https://forms.gle/cSY5vvK11iEZunWW8';
+                    } else {
+                        newSrc = 'https://docs.google.com/forms/d/e/1FAIpQLSf_kPK5tfPjJx1BG5Z84CoVAj3kSLf8b0udSVqLmD3eJ1WBqg/viewform';
+                    }
+
+                    // Add timestamp to force refresh
+                    form.src = newSrc + '?t=' + new Date().getTime();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
